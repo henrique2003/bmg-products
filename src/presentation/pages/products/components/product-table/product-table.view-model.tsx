@@ -3,6 +3,9 @@
 import { Product } from "@/domain"
 import { ChangeEvent, useState } from "react"
 import { UseProductTableViewModelParams } from "./product-table-types"
+import { BmgService } from '../../../../../infra-data/services/bmg-service';
+
+const bmgService = new BmgService()
 
 export function useProductTableViewModel({
   onDeleteProduct,
@@ -21,12 +24,15 @@ export function useProductTableViewModel({
     setCurrentProduct(product)
   }
 
-  const handleDeleteProduct = (): void => {
+  const handleDeleteProduct = async (): Promise<void> => {
     if (!currentProduct) {
       return
     }
 
-    // api
+    const result = await bmgService.delete(currentProduct.id)
+    if (!result.ok) {
+      return alert('Erro ao atualizar produto')
+    }
 
     onDeleteProduct(currentProduct)
     setIsDeleteModalOpen(false)
@@ -38,12 +44,15 @@ export function useProductTableViewModel({
     })
   }
 
-  const handleClickEditProduct = (): void => {
+  const handleClickEditProduct = async (): Promise<void> => {
     if (!currentProduct) {
       return
     }
 
-    // api
+    const result = await bmgService.update(currentProduct)
+    if (!result.ok) {
+      return alert('Erro ao atualizar produto')
+    }
 
     setIsEditModalOpen(false)
     setCurrentProduct({

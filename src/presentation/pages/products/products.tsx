@@ -1,23 +1,29 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Product } from '@/domain'
 import { AddProductModal, ProductTable } from './components'
 import { Filters, FilterType } from './components/filters'
+import { BmgService } from '@/infra-data/services'
 
-const initialProducts: Product[] = [
-  { id: 1, name: 'Laptop', description: 'High-performance laptop', price: 999.99 },
-  { id: 2, name: 'Smartphone', description: 'Latest model smartphone', price: 699.99 },
-  { id: 3, name: 'Headphones', description: 'Noise-cancelling headphones', price: 199.99 },
-  { id: 4, name: 'Tablet', description: '10-inch tablet with stylus', price: 449.99 },
-  { id: 5, name: 'Smartwatch', description: 'Fitness tracking smartwatch', price: 249.99 },
-]
+const bmgService = new BmgService()
 
 export function Products() {
-  const [products, setProducts] = useState<Product[]>(initialProducts)
+  const [products, setProducts] = useState<Product[]>([])
   const [filterText, setFilterText] = useState('')
   const [filterType, setFilterType] = useState<FilterType>(FilterType.name)
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+
+  useEffect(() => {
+    (async () => {
+      const result = await bmgService.getAll()
+      if (!result.ok) {
+        return alert('Erro ao listar produtos')
+      }
+
+      setProducts(result.value)
+    })()
+  }, [])
 
   const filteredProducts = useMemo(() => products.filter(product => {
     const searchText = filterText.toLowerCase()

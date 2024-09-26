@@ -3,6 +3,9 @@
 import { ChangeEvent, useState } from "react"
 import { UseAddProductModalParams } from "./add-product-modal-types"
 import { Product } from "@/domain"
+import { BmgService } from '../../../../../../infra-data/services/bmg-service';
+
+const bmgService = new BmgService()
 
 export function useAddProductModalViewModel({
   onProductCreate
@@ -22,7 +25,10 @@ export function useAddProductModalViewModel({
   }
 
   async function handleCreateProduct(): Promise<void> {
-    // api
+    const result = await bmgService.create(newProduct)
+    if (!result.ok) {
+      return alert('Erro ao cadastrar produto')
+    }
 
     onProductCreate(newProduct)
   }
