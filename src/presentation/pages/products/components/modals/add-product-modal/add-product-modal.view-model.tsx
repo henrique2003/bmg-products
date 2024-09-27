@@ -16,12 +16,19 @@ export function useAddProductModalViewModel({
     description: '',
     price: 0
   })
+
   function handleChangeProductForm(e: ChangeEvent<HTMLInputElement>): void {
-    if (!e.target) {
+    let value: string | number = e.target.value
+
+    if (value === '') {
       return
     }
 
-    setNewProduct({ ...newProduct, [e.target.name]: e.target.value })
+    if (e.target.type === 'number' && !isNaN(parseFloat(value))) {
+      value = parseFloat(value)
+    }
+
+    setNewProduct({ ...newProduct, [e.target.name]: value })
   }
 
   async function handleCreateProduct(): Promise<void> {

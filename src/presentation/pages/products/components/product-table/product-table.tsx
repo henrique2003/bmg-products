@@ -54,7 +54,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                 handleClickOpenModal={handleClickOpenEditModal}
               />
               <DeleteProductModal
-                product={currentProduct}
+                product={product}
                 handleChangeCurrentProduct={handleChangeCurrentProduct}
                 handleDeleteProduct={handleDeleteProduct}
                 open={isDeleteModalOpen} onOpenChange={handleChangeDeleteModalIsOpen}

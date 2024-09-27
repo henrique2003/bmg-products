@@ -58,7 +58,11 @@ export class AxiosService implements IApiService {
 
   async delete(url: string): Promise<IResult<void, Error>> {
     try {
-      await this.axios.put<Response>(url);
+      await this.axios.delete<Response>(url, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
       return Result.success();
     } catch (error) {

@@ -43,9 +43,9 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">Name</Label>
             <Input
-              id="name"
-              value={newProduct.name}
-              name='name'
+              id="title"
+              value={newProduct.title}
+              name='title'
               onChange={handleChangeProductForm}
               className="col-span-3"
             />
