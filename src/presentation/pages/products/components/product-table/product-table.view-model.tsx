@@ -4,6 +4,7 @@ import { Product } from "@/domain"
 import { ChangeEvent, useState } from "react"
 import { UseProductTableViewModelParams } from "./product-table-types"
 import { BmgService } from '../../../../../infra-data/services/bmg-service';
+import { Notification } from "@/presentation/utils/notifications";
 
 const bmgService = new BmgService()
 
@@ -31,7 +32,7 @@ export function useProductTableViewModel({
 
     const result = await bmgService.delete(currentProduct.id)
     if (!result.ok) {
-      return
+      return Notification.error('Erro ao deletar produto')
     }
 
     onDeleteProduct(currentProduct)
@@ -42,11 +43,16 @@ export function useProductTableViewModel({
       title: '',
       price: 0
     })
+    Notification.success('Produto deletado com sucesso')
   }
 
   const handleClickEditProduct = async (): Promise<void> => {
     if (!currentProduct) {
       return
+    }
+
+    if (!currentProduct.title || !currentProduct.description || !currentProduct.price) {
+      return Notification.error('Preencha todos os campos')
     }
 
     const result = await bmgService.update(currentProduct)
@@ -62,6 +68,7 @@ export function useProductTableViewModel({
       price: 0
     })
     onEditProduct(currentProduct)
+    Notification.success('Produto atualizado com sucesso')
   }
 
   function handleClickOpenEditModal(product: Product): void {
