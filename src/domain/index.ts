@@ -1,2 +1,2 @@
-export * from './products/entities/product'
-export * from './products/repositories/i-product-repository'
+export * from './clients/entities/client'
+export * from './clients/repositories/i-client-repository'

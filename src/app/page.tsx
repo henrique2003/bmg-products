@@ -1,5 +1,5 @@
-import { Products } from "@/presentation/pages/products/products"
+import { Clients } from "@/presentation/pages/clients/clients"
 
 export default function Page() {
-  return <Products />
+  return <Clients />
 }
