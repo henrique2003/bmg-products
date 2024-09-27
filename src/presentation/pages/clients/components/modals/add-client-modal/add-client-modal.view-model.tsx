@@ -45,6 +45,13 @@ export function useAddClientModalViewModel({
 
     Notification.success('Cliente criado com sucesso');
     onClientCreate(newClient);
+    setNewClient({
+      id: 0,
+      name: '',
+      age: 0,
+      email: '',
+      address: ''
+    });
   }
 
   return {
