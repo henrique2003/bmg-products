@@ -12,7 +12,7 @@ export function useAddProductModalViewModel({
 }: UseAddProductModalParams) {
   const [newProduct, setNewProduct] = useState<Product>({
     id: 0,
-    name: '',
+    title: '',
     description: '',
     price: 0
   })
@@ -27,7 +27,7 @@ export function useAddProductModalViewModel({
   async function handleCreateProduct(): Promise<void> {
     const result = await bmgService.create(newProduct)
     if (!result.ok) {
-      return alert('Erro ao cadastrar produto')
+      return
     }
 
     onProductCreate(newProduct)

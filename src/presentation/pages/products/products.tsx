@@ -18,7 +18,7 @@ export function Products() {
     (async () => {
       const result = await bmgService.getAll()
       if (!result.ok) {
-        return alert('Erro ao listar produtos')
+        return
       }
 
       setProducts(result.value)
@@ -29,7 +29,7 @@ export function Products() {
     const searchText = filterText.toLowerCase()
     switch (filterType) {
       case FilterType.name:
-        return product.name.toLowerCase().includes(searchText)
+        return product.title.toLowerCase().includes(searchText)
       case FilterType.description:
         return product.description.toLowerCase().includes(searchText)
       case FilterType.price:

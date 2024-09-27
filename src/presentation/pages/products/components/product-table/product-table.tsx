@@ -30,7 +30,7 @@ export const ProductTable: React.FC<ProductTableProps> = ({
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px]">ID</TableHead>
-          <TableHead>Nome</TableHead>
+          <TableHead>Titulo</TableHead>
           <TableHead>Descrição</TableHead>
           <TableHead className="text-right">Preço</TableHead>
           <TableHead className="text-right">Ações</TableHead>
@@ -40,14 +40,15 @@ export const ProductTable: React.FC<ProductTableProps> = ({
         {products.map((product) => (
           <TableRow key={product.id}>
             <TableCell className="font-medium">{product.id}</TableCell>
-            <TableCell>{product.name}</TableCell>
+            <TableCell>{product.title}</TableCell>
             <TableCell>{product.description}</TableCell>
-            <TableCell className="text-right">${product.price.toFixed(2)}</TableCell>
+            <TableCell className="text-right">R$ {product.price.toFixed(2).toString().replace('.', ',')}</TableCell>
             <TableCell className="text-right">
               <EditProductModal
+                currentProduct={currentProduct}
                 open={isEditModalOpen}
                 onOpenChange={handleChangeEditModalIsOpen}
-                product={currentProduct}
+                product={product}
                 handleChangeProductForm={handleChangeProductForm}
                 handleClickEditProduct={handleClickEditProduct}
                 handleClickOpenModal={handleClickOpenEditModal}

@@ -16,7 +16,7 @@ export function useProductTableViewModel({
   const [currentProduct, setCurrentProduct] = useState<Product>({
     id: 0,
     description: '',
-    name: '',
+    title: '',
     price: 0
   })
 
@@ -31,7 +31,7 @@ export function useProductTableViewModel({
 
     const result = await bmgService.delete(currentProduct.id)
     if (!result.ok) {
-      return alert('Erro ao atualizar produto')
+      return
     }
 
     onDeleteProduct(currentProduct)
@@ -39,7 +39,7 @@ export function useProductTableViewModel({
     setCurrentProduct({
       id: 0,
       description: '',
-      name: '',
+      title: '',
       price: 0
     })
   }
@@ -51,14 +51,14 @@ export function useProductTableViewModel({
 
     const result = await bmgService.update(currentProduct)
     if (!result.ok) {
-      return alert('Erro ao atualizar produto')
+      return
     }
 
     setIsEditModalOpen(false)
     setCurrentProduct({
       id: 0,
       description: '',
-      name: '',
+      title: '',
       price: 0
     })
     onEditProduct(currentProduct)
@@ -69,11 +69,17 @@ export function useProductTableViewModel({
   }
 
   function handleChangeProductForm(e: ChangeEvent<HTMLInputElement>): void {
-    if (!e.target) {
+    let value: string | number = e.target.value
+
+    if (value === '') {
       return
     }
 
-    setCurrentProduct({ ...currentProduct, [e.target.name]: e.target.value })
+    if (e.target.type === 'number' && !isNaN(parseFloat(value))) {
+      value = parseFloat(value)
+    }
+
+    setCurrentProduct({ ...currentProduct, [e.target.name]: value })
   }
 
   function handleChangeEditModalIsOpen(open: boolean): void {

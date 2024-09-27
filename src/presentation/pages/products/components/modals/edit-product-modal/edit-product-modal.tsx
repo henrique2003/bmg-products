@@ -18,6 +18,7 @@ export const EditProductModal: React.FC<EditProductModalProps> = ({
   handleClickEditProduct,
   handleClickOpenModal,
   product,
+  currentProduct,
   onOpenChange,
   open
 }) => {
@@ -30,44 +31,42 @@ export const EditProductModal: React.FC<EditProductModalProps> = ({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit Product</DialogTitle>
-          <DialogDescription>Edit the details of the product.</DialogDescription>
+          <DialogTitle>Editar Produto</DialogTitle>
+          <DialogDescription>Editar detalhes do produto.</DialogDescription>
         </DialogHeader>
-        {product && (
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="edit-name" className="text-right">Name</Label>
-              <Input
-                id="edit-name"
-                value={product.name}
-                onChange={handleChangeProductForm}
-                className="col-span-3"
-                name="name"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="edit-description" className="text-right">Description</Label>
-              <Input
-                id="edit-description"
-                value={product.description}
-                onChange={handleChangeProductForm}
-                className="col-span-3"
-                name="description"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="edit-price" className="text-right">Price</Label>
-              <Input
-                id="edit-price"
-                type="number"
-                value={product.price}
-                onChange={handleChangeProductForm}
-                className="col-span-3"
-                name="price"
-              />
-            </div>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="edit-name" className="text-right">Name</Label>
+            <Input
+              id="edit-name"
+              value={currentProduct.title}
+              onChange={handleChangeProductForm}
+              className="col-span-3"
+              name="title"
+            />
           </div>
-        )}
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="edit-description" className="text-right">Description</Label>
+            <Input
+              id="edit-description"
+              value={currentProduct.description}
+              onChange={handleChangeProductForm}
+              className="col-span-3"
+              name="description"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="edit-price" className="text-right">Price</Label>
+            <Input
+              id="edit-price"
+              type="number"
+              value={currentProduct.price}
+              onChange={handleChangeProductForm}
+              className="col-span-3"
+              name="price"
+            />
+          </div>
+        </div>
         <DialogFooter>
           <Button onClick={handleClickEditProduct}>Save Changes</Button>
         </DialogFooter>

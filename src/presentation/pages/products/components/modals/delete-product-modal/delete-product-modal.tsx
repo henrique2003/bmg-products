@@ -27,14 +27,14 @@ export const DeleteProductModal: React.FC<DeleteProductModalProps> = ({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Delete Product</DialogTitle>
-          <DialogDescription>Are you sure you want to delete this product?</DialogDescription>
+          <DialogTitle>Deletar Produto</DialogTitle>
+          <DialogDescription>Você tem certeza que deseja deletar este produto?</DialogDescription>
         </DialogHeader>
         {product && (
           <div className="py-4">
-            <p><strong>Name:</strong> {product.name}</p>
+            <p><strong>Name:</strong> {product.title}</p>
             <p><strong>Description:</strong> {product.description}</p>
-            <p><strong>Price:</strong> ${product.price.toFixed(2)}</p>
+            <p><strong>Price:</strong> ${parseFloat(product.price.toString()).toFixed(2)}</p>
           </div>
         )}
         <DialogFooter>

@@ -7,4 +7,5 @@ export type EditProductModalProps = ModalProps & {
   handleClickEditProduct(): void
   handleClickOpenModal(product: Product | null): void
   product: Product | null
+  currentProduct: Product
 }

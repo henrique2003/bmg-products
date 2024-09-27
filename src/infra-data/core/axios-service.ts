@@ -15,7 +15,7 @@ export class AxiosService implements IApiService {
   ): Promise<IResult<Response, Error>> {
     try {
       const result = await this.axios.get<Response>(url, {
-        params,
+        params
       });
 
       return Result.success(result.data);
@@ -31,7 +31,6 @@ export class AxiosService implements IApiService {
   ): Promise<IResult<Response, Error>> {
     try {
       const result = await this.axios.post<Response>(url, data, {
-
         params
       });
 
