@@ -20,7 +20,7 @@ export const SeeClientModal: React.FC<SeeClientModalProps> = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="mr-2" onClick={() => handleClickOpenModal(client)}>
+        <Button variant="outline" size="sm" className="mr-2 max-sm:mr-0 max-sm:mb-1" onClick={() => handleClickOpenModal(client)}>
           <Eye className="h-4 w-4" />
         </Button>
       </DialogTrigger>

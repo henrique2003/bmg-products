@@ -24,7 +24,8 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({
   const {
     handleChangeClientForm,
     handleCreateClient,
-    newClient
+    newClient,
+    isLoading
   } = useAddClientModalViewModel({
     onClientCreate
   });
@@ -32,16 +33,16 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
-        <Button><Plus className="mr-2 h-4 w-4" /> Add Client</Button>
+        <Button><Plus className="mr-2 h-4 w-4" /> Adicionar</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add New Client</DialogTitle>
-          <DialogDescription>Enter the details of the new client.</DialogDescription>
+          <DialogTitle>Adicionar novo cliente</DialogTitle>
+          <DialogDescription>Coloque os detalhes do seu novo cliente.</DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">Name</Label>
+            <Label htmlFor="name" className="text-right">Nome</Label>
             <Input
               id="name"
               value={newClient.name}
@@ -51,7 +52,7 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="age" className="text-right">Age</Label>
+            <Label htmlFor="age" className="text-right">Idade</Label>
             <Input
               id="age"
               type="number"
@@ -72,7 +73,7 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="address" className="text-right">Address</Label>
+            <Label htmlFor="address" className="text-right">Endereço</Label>
             <Input
               id="address"
               value={newClient.address}
@@ -83,7 +84,7 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={handleCreateClient}>Add Client</Button>
+          <Button onClick={handleCreateClient} disabled={isLoading}>Adicionar</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

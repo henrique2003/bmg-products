@@ -18,6 +18,7 @@ export function useAddClientModalViewModel({
     email: '',
     address: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleChangeClientForm(e: ChangeEvent<HTMLInputElement>): void {
     let value: string | number = e.target.value;
@@ -34,6 +35,8 @@ export function useAddClientModalViewModel({
   }
 
   async function handleCreateClient(): Promise<void> {
+    setIsLoading(true)
+
     if (!newClient.name || newClient.age <= 0 || !newClient.email || !newClient.address) {
       return Notification.error('Preencha todos os campos');
     }
@@ -52,11 +55,13 @@ export function useAddClientModalViewModel({
       email: '',
       address: ''
     });
+    setIsLoading(false)
   }
 
   return {
     newClient,
     handleCreateClient,
-    handleChangeClientForm
+    handleChangeClientForm,
+    isLoading
   };
 }

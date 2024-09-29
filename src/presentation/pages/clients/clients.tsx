@@ -13,13 +13,18 @@ export function Clients() {
   const [filterText, setFilterText] = useState('')
   const [filterType, setFilterType] = useState<FilterType>(FilterType.Name)
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+  const [isLoadingClients, setIsLoadingClients] = useState(false)
 
   useEffect(() => {
     const fetchClients = async () => {
+      setIsLoadingClients(true)
+
       const result = await bmgService.getAll()
       if (result.ok && result.value.length > 0) {
         setClients(result.value)
       }
+
+      setIsLoadingClients(false)
     }
 
     fetchClients()
@@ -72,16 +77,12 @@ export function Clients() {
           onClientCreate={onClientCreate}
         />
       </div>
-      <div className="border rounded-lg overflow-hidden">
-        <ClientTable
-          onDeleteClient={onDeleteClient}
-          onEditClient={onEditClient}
-          clients={filteredClients}
-        />
-      </div>
-      {filteredClients.length === 0 && (
-        <p className="text-center text-gray-500 mt-4">Nenhum cliente encontrado</p>
-      )}
+      <ClientTable
+        onDeleteClient={onDeleteClient}
+        onEditClient={onEditClient}
+        clients={filteredClients}
+        isLoading={isLoadingClients}
+      />
     </div>
   )
 }
