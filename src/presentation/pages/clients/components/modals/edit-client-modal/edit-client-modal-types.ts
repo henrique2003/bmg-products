@@ -8,4 +8,5 @@ export type EditClientModalProps = ModalProps & {
   handleClickOpenModal(client: Client | null): void;
   client: Client | null;
   currentClient: Client;
+  isLoading: boolean
 };

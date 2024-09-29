@@ -21,6 +21,7 @@ export const EditClientModal: React.FC<EditClientModalProps> = ({
   currentClient,
   onOpenChange,
   open,
+  isLoading
 }) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -79,7 +80,7 @@ export const EditClientModal: React.FC<EditClientModalProps> = ({
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={handleClickEditClient}>Salvar Alterações</Button>
+          <Button onClick={handleClickEditClient} disabled={isLoading}>Salvar Alterações</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

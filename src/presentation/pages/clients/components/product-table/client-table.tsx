@@ -64,6 +64,7 @@ export const ClientTable: React.FC<ClientTableProps> = ({
                   handleChangeClientForm={handleChangeClientForm}
                   handleClickEditClient={handleClickEditClient}
                   handleClickOpenModal={handleClickOpenEditModal}
+                  isLoading={isLoadingAction}
                 />
                 <DeleteClientModal
                   client={client}
