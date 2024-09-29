@@ -22,7 +22,8 @@ export const ClientTable: React.FC<ClientTableProps> = ({
     isDeleteModalOpen,
     isEditModalOpen,
     currentClient,
-    isSeeModalOpen
+    isSeeModalOpen,
+    isLoadingAction
   } = useClientTableViewModel({
     onDeleteClient,
     onEditClient
@@ -70,6 +71,7 @@ export const ClientTable: React.FC<ClientTableProps> = ({
                   handleDeleteClient={handleDeleteClient}
                   open={isDeleteModalOpen}
                   onOpenChange={handleChangeDeleteModalIsOpen}
+                  isLoading={isLoadingAction}
                 />
               </TableCell>
             </TableRow>

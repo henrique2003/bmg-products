@@ -17,6 +17,7 @@ export const DeleteClientModal: React.FC<DeleteClientModalProps> = ({
   handleChangeCurrentClient,
   client,
   handleDeleteClient,
+  isLoading
 }) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -38,7 +39,7 @@ export const DeleteClientModal: React.FC<DeleteClientModalProps> = ({
           </div>
         )}
         <DialogFooter>
-          <Button variant="destructive" onClick={handleDeleteClient}>Deletar Cliente</Button>
+          <Button variant="destructive" onClick={handleDeleteClient} disabled={isLoading}>Deletar Cliente</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

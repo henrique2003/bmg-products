@@ -12,6 +12,7 @@ export function useClientTableViewModel({
   onDeleteClient,
   onEditClient
 }: UseClientTableViewModelParams) {
+  const [isLoadingAction, setIsLoadingAction] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isSeeModalOpen, setIsSeeModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -28,6 +29,8 @@ export function useClientTableViewModel({
   }
 
   const handleDeleteClient = async (): Promise<void> => {
+    setIsLoadingAction(true);
+
     if (!currentClient) {
       return;
     }
@@ -40,10 +43,13 @@ export function useClientTableViewModel({
     onDeleteClient(currentClient);
     setIsDeleteModalOpen(false);
     setCurrentClient({ id: 0, name: '', age: 0, email: '', address: '' });
+    setIsLoadingAction(false);
     Notification.success('Cliente deletado com sucesso');
   };
 
   const handleClickEditClient = async (): Promise<void> => {
+    setIsLoadingAction(true);
+
     if (!currentClient) {
       return;
     }
@@ -60,6 +66,7 @@ export function useClientTableViewModel({
     setIsEditModalOpen(false);
     setCurrentClient({ id: 0, name: '', age: 0, email: '', address: '' });
     onEditClient(currentClient);
+    setIsLoadingAction(false);
     Notification.success('Cliente atualizado com sucesso');
   };
 
@@ -107,6 +114,7 @@ export function useClientTableViewModel({
     handleChangeCurrentClient,
     handleChangeEditModalIsOpen,
     handleChangeDeleteModalIsOpen,
+    isLoadingAction,
     isDeleteModalOpen,
     isEditModalOpen,
     isSeeModalOpen,
