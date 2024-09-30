@@ -11,7 +11,7 @@ export const Filters: React.FC<FiltersProps> = ({
   return (
     <div className="flex gap-4 flex-grow mr-4">
       <Input
-        placeholder={`Filtrar por ${filterType}...`}
+        placeholder={`Filtrar...`}
         value={value}
         onChange={onInputChange}
         className="flex-grow"
