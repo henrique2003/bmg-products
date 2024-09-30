@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Banco BMS",
-  description: "Teste CRUD Produtos",
+  title: "Banco BMG",
+  description: "Teste CRUD Clientes",
 };
 
 export default function RootLayout({
