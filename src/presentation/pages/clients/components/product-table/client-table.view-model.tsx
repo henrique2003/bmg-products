@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from "react";
 import { UseClientTableViewModelParams } from "./client-table-types";
 import { BmgService } from '../../../../../infra-data/services/bmg-service';
 import { Notification } from "@/presentation/utils/notifications";
+import { Email } from "@/domain/core/value-objects";
 
 const bmgService = new BmgService();
 
@@ -32,11 +33,12 @@ export function useClientTableViewModel({
     setIsLoadingAction(true);
 
     if (!currentClient) {
-      return;
+      return setIsLoadingAction(false);
     }
 
     const result = await bmgService.delete(currentClient.id);
     if (!result.ok) {
+      setIsLoadingAction(false);
       return Notification.error('Erro ao deletar cliente');
     }
 
@@ -51,16 +53,22 @@ export function useClientTableViewModel({
     setIsLoadingAction(true);
 
     if (!currentClient) {
-      return;
+      return setIsLoadingAction(false);
     }
 
     if (!currentClient.name || !currentClient.email || !currentClient.address) {
+      setIsLoadingAction(false);
       return Notification.error('Preencha todos os campos');
+    }
+
+    if (!Email.isValid(currentClient.email)) {
+      setIsLoadingAction(false);
+      return Notification.error('Email inválido');
     }
 
     const result = await bmgService.update(currentClient);
     if (!result.ok) {
-      return;
+      return setIsLoadingAction(false);
     }
 
     setIsEditModalOpen(false);

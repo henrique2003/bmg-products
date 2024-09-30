@@ -5,6 +5,7 @@ import { UseAddClientModalParams } from "./add-client-modal-types";
 import { Client } from "@/domain";
 import { BmgService } from '../../../../../../infra-data/services/bmg-service';
 import { Notification } from "@/presentation/utils/notifications";
+import { Email } from "@/domain/core/value-objects";
 
 const bmgService = new BmgService();
 
@@ -35,14 +36,21 @@ export function useAddClientModalViewModel({
   }
 
   async function handleCreateClient(): Promise<void> {
-    setIsLoading(true)
+    setIsLoading(true);
 
     if (!newClient.name || newClient.age <= 0 || !newClient.email || !newClient.address) {
+      setIsLoading(false);
       return Notification.error('Preencha todos os campos');
+    }
+
+    if (!Email.isValid(newClient.email)) {
+      setIsLoading(false);
+      return Notification.error('Email inválido');
     }
 
     const result = await bmgService.create(newClient);
     if (!result.ok) {
+      setIsLoading(false);
       return Notification.error('Erro ao criar cliente, confira os dados');
     }
 
@@ -55,7 +63,7 @@ export function useAddClientModalViewModel({
       email: '',
       address: ''
     });
-    setIsLoading(false)
+    setIsLoading(false);
   }
 
   return {

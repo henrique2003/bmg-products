@@ -10,12 +10,6 @@ export const Filters: React.FC<FiltersProps> = ({
 }) => {
   return (
     <div className="flex gap-4 flex-grow mr-4">
-      <Input
-        placeholder={`Filtrar...`}
-        value={value}
-        onChange={onInputChange}
-        className="flex-grow"
-      />
       <Select value={filterType} onValueChange={onSelectChange}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Filtrar por" />
@@ -26,6 +20,12 @@ export const Filters: React.FC<FiltersProps> = ({
           <SelectItem value={FilterType.Email}>E-mail</SelectItem>
         </SelectContent>
       </Select>
+      <Input
+        placeholder={`Filtrar...`}
+        value={value}
+        onChange={onInputChange}
+        className="flex-grow"
+      />
     </div>
   );
 };
